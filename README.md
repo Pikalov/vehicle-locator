@@ -4,6 +4,9 @@ Run the project by following command:
 Rest endpoints available by url:
 http://localhost:8080/vehicle-locator/
 
+Documented api available on Springfox Swagger UI:
+http://localhost:8080/swagger-ui.html
+
 docker command to pull postgis image:
 `docker pull mpikalov/postgis:vehicle_locator_db`
 

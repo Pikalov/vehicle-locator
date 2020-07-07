@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Arrays;
+import java.util.Objects;
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -17,6 +19,12 @@ public class PointDto {
 
     public PointDto() {
     }
+
+    public PointDto(Double coordinateX, Double coordinateY) {
+        this.type = "Point";
+        this.coordinates = new Double[] {coordinateX, coordinateY};
+    }
+
 
     public PointDto(String type, Double[] coordinates) {
         this.type = type;
@@ -38,4 +46,14 @@ public class PointDto {
     public void setCoordinates(Double[] coordinates) {
         this.coordinates = coordinates;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PointDto pointDto = (PointDto) o;
+        return Objects.equals(type, pointDto.type) &&
+                Arrays.equals(coordinates, pointDto.coordinates);
+    }
+
 }

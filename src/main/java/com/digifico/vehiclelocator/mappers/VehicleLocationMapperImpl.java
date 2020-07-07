@@ -37,9 +37,7 @@ public class VehicleLocationMapperImpl implements VehicleLocationMapper {
             vehicleLocationDto = new VehicleLocationDto();
             vehicleLocationDto.setId(vehicleLocationEntity.getId());
             if (vehicleLocationEntity.getLocation() != null) {
-                PointDto pointDto = new PointDto();
-                pointDto.setType("Point");
-                pointDto.setCoordinates(new Double[]{vehicleLocationEntity.getLocation().getX(), vehicleLocationEntity.getLocation().getY()});
+                PointDto pointDto = new PointDto(vehicleLocationEntity.getLocation().getX(), vehicleLocationEntity.getLocation().getY());
                 vehicleLocationDto.setLocation(pointDto);
             }
         }

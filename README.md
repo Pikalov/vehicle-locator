@@ -7,6 +7,9 @@ http://localhost:8080/vehicle-locator/
 docker command to pull postgis image:
 `docker pull mpikalov/postgis:vehicle_locator_db`
 
+docker command to run postgis image:
+`docker run --name "postgis" -p 25432:5432 -d -t vehicle_locator_db`
+
 
 All endpoints use GeoJson to transfer geo-data.
 

@@ -26,6 +26,7 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -90,7 +91,7 @@ public class VehicleLocationServiceTest {
         VehicleLocationDto vehicleLocationDto = createVehicleLocationDto();
         vehicleLocationDto.getLocation().setCoordinates(new Double[]{TEST_VEHICLE_LOCATION_COORD_X + 1, TEST_VEHICLE_LOCATION_COORD_Y + 1});
         when(vehicleLocationRepository.findById(TEST_VEHICLE_LOCATION_ID)).thenReturn(Optional.of(vehicleLocationEntity));
-        when(vehicleLocationRepository.save(any())).thenReturn(vehicleLocationEntity);
+        when(vehicleLocationRepository.save(eq(vehicleLocationEntity))).thenReturn(vehicleLocationEntity);
 
         vehicleLocationService.updateVehicleLocation((vehicleLocationDto));
 
@@ -105,7 +106,8 @@ public class VehicleLocationServiceTest {
         List<VehicleLocationEntity> vehicleLocationEntities = new ArrayList<>();
         vehicleLocationEntities.add(createVehicleLocationEntity());
         vehicleLocationEntities.add(createVehicleLocationEntity());
-        when(vehicleLocationRepository.findAllInside((Polygon) new GeoJsonReader().read(TEST_GEO_JSON_SEARCH_AREA))).thenReturn(vehicleLocationEntities);
+        when(vehicleLocationRepository.findAllInside((Polygon) new GeoJsonReader().read(TEST_GEO_JSON_SEARCH_AREA)))
+                .thenReturn(vehicleLocationEntities);
 
         List<VehicleLocationDto> vehicleLocationDtos = vehicleLocationService.findVehiclesInside(TEST_GEO_JSON_SEARCH_AREA);
 
@@ -115,9 +117,7 @@ public class VehicleLocationServiceTest {
     private VehicleLocationDto createVehicleLocationDto() {
         VehicleLocationDto vehicleLocationDto = new VehicleLocationDto();
         vehicleLocationDto.setId(TEST_VEHICLE_LOCATION_ID);
-        PointDto pointDto = new PointDto();
-        pointDto.setType("Point");
-        pointDto.setCoordinates(new Double[]{TEST_VEHICLE_LOCATION_COORD_X, TEST_VEHICLE_LOCATION_COORD_Y});
+        PointDto pointDto = new PointDto(TEST_VEHICLE_LOCATION_COORD_X, TEST_VEHICLE_LOCATION_COORD_Y);
         vehicleLocationDto.setLocation(pointDto);
         return vehicleLocationDto;
     }

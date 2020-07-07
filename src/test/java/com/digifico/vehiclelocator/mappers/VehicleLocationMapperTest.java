@@ -83,9 +83,7 @@ public class VehicleLocationMapperTest {
     private VehicleLocationDto createVehicleLocationDto() {
         VehicleLocationDto vehicleLocationDto = new VehicleLocationDto();
         vehicleLocationDto.setId(TEST_VEHICLE_LOCATION_ID);
-        PointDto pointDto = new PointDto();
-        pointDto.setType("Point");
-        pointDto.setCoordinates(new Double[]{TEST_VEHICLE_LOCATION_COORD_X, TEST_VEHICLE_LOCATION_COORD_Y});
+        PointDto pointDto = new PointDto(TEST_VEHICLE_LOCATION_COORD_X, TEST_VEHICLE_LOCATION_COORD_Y);
         vehicleLocationDto.setLocation(pointDto);
         return vehicleLocationDto;
     }

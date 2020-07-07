@@ -14,7 +14,7 @@ All endpoints use GeoJson to transfer geo-data.
 
 VehicleLocation:
 `{
-    "id": null,
+    "id": 0,
     "location": {
         "type": "Point",
         "coordinates": [
